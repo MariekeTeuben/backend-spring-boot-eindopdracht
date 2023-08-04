@@ -1,4 +1,4 @@
-package nl.novi.backendgarageservice;
+package nl.novi.backendgarageservice.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
