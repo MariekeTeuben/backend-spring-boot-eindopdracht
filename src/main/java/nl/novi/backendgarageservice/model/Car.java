@@ -42,7 +42,7 @@ public class Car {
     }
 
 
-    //carstatus; examination, maintenance, finished;
+    //carstatus; examination, maintenance, repair, ready;
 
 }
 
