@@ -13,9 +13,7 @@ public class RepairJob {
     @GeneratedValue
     private long id;
 
-    private String type;
-
-    private Double price;
+    private String name;
 
     public long getId() {
         return id;
@@ -25,19 +23,11 @@ public class RepairJob {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setName(String name) {
+        this.name = name;
     }
 }
