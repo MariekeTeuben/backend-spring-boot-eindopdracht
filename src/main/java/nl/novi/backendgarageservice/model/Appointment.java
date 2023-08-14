@@ -14,43 +14,33 @@ public class Appointment {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
-    private LocalDate date;
+    private LocalDate appointmentDate;
 
-    private LocalTime time;
+    private LocalTime appointmentTime;
 
-    private String typeOfMaintenance;
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDate getAppointmentDate() {
+        return appointmentDate;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setAppointmentDate(LocalDate appointmentDate) {
+        this.appointmentDate = appointmentDate;
     }
 
-    public LocalTime getTime() {
-        return time;
+    public LocalTime getAppointmentTime() {
+        return appointmentTime;
     }
 
-    public void setTime(LocalTime time) {
-        this.time = time;
-    }
-
-    public String getTypeOfMaintenance() {
-        return typeOfMaintenance;
-    }
-
-    public void setTypeOfMaintenance(String typeOfMaintenance) {
-        this.typeOfMaintenance = typeOfMaintenance;
+    public void setAppointmentTime(LocalTime appointmentTime) {
+        this.appointmentTime = appointmentTime;
     }
 }
