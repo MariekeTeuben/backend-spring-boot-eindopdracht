@@ -11,7 +11,7 @@ public class RepairJob {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     private String name;
 
