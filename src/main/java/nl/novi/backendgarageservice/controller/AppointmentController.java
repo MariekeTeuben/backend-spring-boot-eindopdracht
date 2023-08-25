@@ -19,7 +19,7 @@ public class AppointmentController {
     private AppointmentRepository repos;
 
     @GetMapping
-    public ResponseEntity<List<Appointment>> getAppointments() {
+    public ResponseEntity<List<Appointment>> getAllAppointments() {
         return ResponseEntity.ok(repos.findAll());
     }
 
