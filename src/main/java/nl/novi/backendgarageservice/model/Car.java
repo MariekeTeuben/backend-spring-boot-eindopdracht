@@ -12,7 +12,7 @@ public class Car {
     private String brand;
 
     @Enumerated(EnumType.STRING)
-    private Carstatus carstatus;
+    private CarStatus carStatus;
 
 
     public String getLicensePlate() {
@@ -31,11 +31,11 @@ public class Car {
         this.brand = brand;
     }
 
-    public nl.novi.backendgarageservice.model.Carstatus getCarstatus() {
+    public CarStatus getCarStatus() {
         return carstatus;
     }
 
-    public void setCarstatus(nl.novi.backendgarageservice.model.Carstatus carstatus) {
+    public void setCarStatus(CarStatus carstatus) {
         this.carstatus = carstatus;
     }
 }

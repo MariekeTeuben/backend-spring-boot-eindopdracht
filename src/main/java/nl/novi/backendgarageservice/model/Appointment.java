@@ -18,7 +18,7 @@ public class Appointment {
     private LocalTime appointmentTime;
 
     @Enumerated(EnumType.STRING)
-    private Appointmenttype appointmenttype;
+    private AppointmentType appointmentType;
 
     public Long getId() {
         return id;
@@ -44,11 +44,11 @@ public class Appointment {
         this.appointmentTime = appointmentTime;
     }
 
-    public Appointmenttype getAppointmenttype() {
+    public AppointmentType getAppointmentType() {
         return appointmenttype;
     }
 
-    public void setAppointmenttype(Appointmenttype appointmenttype) {
+    public void setAppointmentType(AppointmentType appointmenttype) {
         this.appointmenttype = appointmenttype;
     }
 }
