@@ -1,8 +1,6 @@
 package nl.novi.backendgarageservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "cars")
@@ -12,6 +10,10 @@ public class Car {
     private String licensePlate;
 
     private String brand;
+
+    @Enumerated(EnumType.STRING)
+    private CarStatus carStatus;
+
 
     public String getLicensePlate() {
         return licensePlate;
@@ -27,6 +29,14 @@ public class Car {
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public CarStatus getCarStatus() {
+        return carstatus;
+    }
+
+    public void setCarStatus(CarStatus carstatus) {
+        this.carstatus = carstatus;
     }
 }
 

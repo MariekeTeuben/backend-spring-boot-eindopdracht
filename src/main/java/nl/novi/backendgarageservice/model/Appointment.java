@@ -1,9 +1,6 @@
 package nl.novi.backendgarageservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -19,6 +16,9 @@ public class Appointment {
     private LocalDate appointmentDate;
 
     private LocalTime appointmentTime;
+
+    @Enumerated(EnumType.STRING)
+    private AppointmentType appointmentType;
 
     public Long getId() {
         return id;
@@ -42,5 +42,13 @@ public class Appointment {
 
     public void setAppointmentTime(LocalTime appointmentTime) {
         this.appointmentTime = appointmentTime;
+    }
+
+    public AppointmentType getAppointmentType() {
+        return appointmenttype;
+    }
+
+    public void setAppointmentType(AppointmentType appointmenttype) {
+        this.appointmenttype = appointmenttype;
     }
 }
