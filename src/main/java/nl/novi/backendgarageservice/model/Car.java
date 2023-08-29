@@ -32,11 +32,11 @@ public class Car {
     }
 
     public CarStatus getCarStatus() {
-        return carstatus;
+        return carStatus;
     }
 
     public void setCarStatus(CarStatus carstatus) {
-        this.carstatus = carstatus;
+        this.carStatus = carstatus;
     }
 }
 

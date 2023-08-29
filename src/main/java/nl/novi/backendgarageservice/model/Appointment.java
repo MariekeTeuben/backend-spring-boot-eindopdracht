@@ -45,10 +45,10 @@ public class Appointment {
     }
 
     public AppointmentType getAppointmentType() {
-        return appointmenttype;
+        return appointmentType;
     }
 
     public void setAppointmentType(AppointmentType appointmenttype) {
-        this.appointmenttype = appointmenttype;
+        this.appointmentType = appointmenttype;
     }
 }
