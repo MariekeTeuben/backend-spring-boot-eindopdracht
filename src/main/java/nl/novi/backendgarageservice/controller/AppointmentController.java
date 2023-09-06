@@ -32,6 +32,11 @@ public class AppointmentController {
         return new ResponseEntity(appointmentService.getAllAppointments(), HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<AppointmentDto> getAppointmentById(@PathVariable Long id) {
+        return new ResponseEntity(appointmentService.getAppointmentById(id), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Object> createAppointment(@Validated @RequestBody AppointmentDto appointmentDto, BindingResult br) {
         if (br.hasFieldErrors()) {

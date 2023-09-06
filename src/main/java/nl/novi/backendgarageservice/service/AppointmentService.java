@@ -18,7 +18,7 @@ public class AppointmentService {
         this.appointmentRepos = appointmentRepos;
     }
 
-    public AppointmentDto getAppointment(Long id) {
+    public AppointmentDto getAppointmentById(Long id) {
         Appointment appointment = appointmentRepos.findById(id).orElseThrow(() -> new ResourceNotFoundException("Appointment not found"));
 
         AppointmentDto appointmentDto = new AppointmentDto();
@@ -58,5 +58,4 @@ public class AppointmentService {
 
         return appointment.getId();
     }
-
 }
