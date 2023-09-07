@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AppointmentService {
@@ -19,7 +20,7 @@ public class AppointmentService {
     }
 
     public AppointmentDto getAppointmentById(Long id) {
-        Appointment appointment = appointmentRepos.findById(id).orElseThrow(() -> new ResourceNotFoundException("Appointment not found"));
+        Appointment appointment = appointmentRepos.findById(id).orElseThrow(() -> new ResourceNotFoundException("Appointment cannot be found"));
 
         AppointmentDto appointmentDto = new AppointmentDto();
         appointmentDto.id = appointment.getId();
@@ -44,7 +45,12 @@ public class AppointmentService {
             appointmentDtoList.add(appointmentDto);
         }
 
+        if (appointmentDtoList.size() == 0) {
+            throw new ResourceNotFoundException("Appointments cannot be found");
+        }
+
         return appointmentDtoList;
+
     }
 
     public Long createAppointment(AppointmentDto appointmentDto) {
@@ -57,5 +63,17 @@ public class AppointmentService {
         appointmentRepos.save(appointment);
 
         return appointment.getId();
+    }
+
+
+    public Object deleteAppointment(Long id) {
+        Optional<Appointment> optionalAppointment = appointmentRepos.findById(id);
+        if (optionalAppointment.isEmpty()) {
+            throw new ResourceNotFoundException("Appointment cannot be found");
+        } else {
+            Appointment appointment = optionalAppointment.get();
+            appointmentRepos.delete(appointment);
+            return "Appointment deleted successfully";
+        }
     }
 }

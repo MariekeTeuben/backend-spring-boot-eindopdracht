@@ -1,9 +1,6 @@
 package nl.novi.backendgarageservice.controller;
 
 import nl.novi.backendgarageservice.dto.AppointmentDto;
-import nl.novi.backendgarageservice.model.Appointment;
-import nl.novi.backendgarageservice.model.User;
-import nl.novi.backendgarageservice.repository.AppointmentRepository;
 import nl.novi.backendgarageservice.service.AppointmentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +12,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/appointments")
@@ -59,5 +55,10 @@ public class AppointmentController {
             return ResponseEntity.created(uri).body(appointmentDto);
         }
 
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteAppointment(@PathVariable Long id) {
+        return ResponseEntity.ok(appointmentService.deleteAppointment(id));
     }
 }
