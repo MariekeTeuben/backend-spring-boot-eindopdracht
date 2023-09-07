@@ -65,6 +65,19 @@ public class AppointmentService {
         return appointment.getId();
     }
 
+    public Object updateAppointment(Long id, AppointmentDto appointmentDto) {
+        Optional<Appointment> appointment = appointmentRepos.findById(id);
+        if (appointment.isEmpty()) {
+            throw new ResourceNotFoundException("No appointment with id:" + id);
+        } else {
+            Appointment updatedAppointment = appointment.get();
+            updatedAppointment.setAppointmentDate(appointmentDto.appointmentDate);
+            updatedAppointment.setAppointmentTime(appointmentDto.appointmentTime);
+            updatedAppointment.setAppointmentType(appointmentDto.appointmentType);
+            appointmentRepos.save(updatedAppointment);
+            return updatedAppointment;
+        }
+    }
 
     public Object deleteAppointment(Long id) {
         Optional<Appointment> optionalAppointment = appointmentRepos.findById(id);
@@ -76,4 +89,6 @@ public class AppointmentService {
             return "Appointment deleted successfully";
         }
     }
+
+
 }
