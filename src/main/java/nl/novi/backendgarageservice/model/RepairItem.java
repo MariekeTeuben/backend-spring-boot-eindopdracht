@@ -9,21 +9,19 @@ import jakarta.persistence.Table;
 @Table(name = "repairitems")
 public class RepairItem {
 
-
     @Id
     @GeneratedValue
     private Long id;
 
-    private String name;
+    private String itemName;
 
-    private String type;
+    private String itemType;
 
-    private String description;
+    private String itemDescription;
 
-    private Integer quantity;
+    private Integer itemQuantity;
 
-    private Double price;
-
+    private Double itemPrice;
 
     public Long getId() {
         return id;
@@ -33,43 +31,43 @@ public class RepairItem {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getItemName() {
+        return itemName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
-    public String getType() {
-        return type;
+    public String getItemType() {
+        return itemType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
     }
 
-    public String getDescription() {
-        return description;
+    public String getItemDescription() {
+        return itemDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setItemDescription(String itemDescription) {
+        this.itemDescription = itemDescription;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public Integer getItemQuantity() {
+        return itemQuantity;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setItemQuantity(Integer itemQuantity) {
+        this.itemQuantity = itemQuantity;
     }
 
-    public Double getPrice() {
-        return price;
+    public Double getItemPrice() {
+        return itemPrice;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setItemPrice(Double itemPrice) {
+        this.itemPrice = itemPrice;
     }
 }
