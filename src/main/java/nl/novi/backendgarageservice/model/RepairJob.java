@@ -13,41 +13,41 @@ public class RepairJob {
     @GeneratedValue
     private Long id;
 
-    private String name;
+    private String jobName;
 
-    private String description;
+    private String jobDescription;
 
-    private Double price;
+    private Double jobPrice;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getJobName() {
+        return jobName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setJobName(String jobName) {
+        this.jobName = jobName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getJobDescription() {
+        return jobDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setJobDescription(String jobDescription) {
+        this.jobDescription = jobDescription;
     }
 
-    public Double getPrice() {
-        return price;
+    public Double getJobPrice() {
+        return jobPrice;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setJobPrice(Double jobPrice) {
+        this.jobPrice = jobPrice;
     }
 }
