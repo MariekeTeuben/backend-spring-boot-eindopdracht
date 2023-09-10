@@ -9,11 +9,17 @@ public class Car {
     @Id
     private String licensePlate;
 
-    private String brand;
+    private String carBrand;
+
+    private String carModel;
+
+    @Enumerated(EnumType.STRING)
+    private CarType carType;
+
+    private String carColor;
 
     @Enumerated(EnumType.STRING)
     private CarStatus carStatus;
-
 
     public String getLicensePlate() {
         return licensePlate;
@@ -23,20 +29,44 @@ public class Car {
         this.licensePlate = licensePlate;
     }
 
-    public String getBrand() {
-        return brand;
+    public String getCarBrand() {
+        return carBrand;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setCarBrand(String carBrand) {
+        this.carBrand = carBrand;
+    }
+
+    public String getCarModel() {
+        return carModel;
+    }
+
+    public void setCarModel(String carModel) {
+        this.carModel = carModel;
+    }
+
+    public CarType getCarType() {
+        return carType;
+    }
+
+    public void setCarType(CarType carType) {
+        this.carType = carType;
+    }
+
+    public String getCarColor() {
+        return carColor;
+    }
+
+    public void setCarColor(String carColor) {
+        this.carColor = carColor;
     }
 
     public CarStatus getCarStatus() {
         return carStatus;
     }
 
-    public void setCarStatus(CarStatus carstatus) {
-        this.carStatus = carstatus;
+    public void setCarStatus(CarStatus carStatus) {
+        this.carStatus = carStatus;
     }
 }
 
