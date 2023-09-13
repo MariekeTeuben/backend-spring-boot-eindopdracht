@@ -2,6 +2,7 @@ package nl.novi.backendgarageservice.service;
 
 import nl.novi.backendgarageservice.dto.RepairJobDto;
 import nl.novi.backendgarageservice.exception.ResourceNotFoundException;
+import nl.novi.backendgarageservice.model.RepairItem;
 import nl.novi.backendgarageservice.model.RepairJob;
 import nl.novi.backendgarageservice.repository.RepairJobRepository;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,10 @@ public class RepairJobService {
         RepairJobDto repairJobDto = new RepairJobDto();
         repairJobDto.id = repairJob.getId();
         repairJobDto.jobName = repairJob.getJobName();
-        repairJobDto.jobDescription = repairJob.getJobDescription();
-        repairJobDto.jobPrice = repairJob.getJobPrice();
+
+        for (RepairItem repairItem : repairJob.getRepairItems()) {
+            repairJobDto.repairItems.add(repairItem.getItemName());
+        }
 
         return repairJobDto;
     }
@@ -40,8 +43,6 @@ public class RepairJobService {
 
             repairJobDto.id = repairJob.getId();
             repairJobDto.jobName = repairJob.getJobName();
-            repairJobDto.jobDescription = repairJob.getJobDescription();
-            repairJobDto.jobPrice = repairJob.getJobPrice();
 
             repairJobDtoList.add(repairJobDto);
         }
@@ -58,8 +59,6 @@ public class RepairJobService {
         RepairJob repairJob = new RepairJob();
 
         repairJob.setJobName(repairJobDto.jobName);
-        repairJob.setJobDescription(repairJobDto.jobDescription);
-        repairJob.setJobPrice(repairJobDto.jobPrice);
 
         repairJobRepos.save(repairJob);
 
@@ -73,8 +72,6 @@ public class RepairJobService {
         } else {
             RepairJob updatedRepairJob = repairJob.get();
             updatedRepairJob.setJobName(repairJobDto.jobName);
-            updatedRepairJob.setJobDescription(repairJobDto.jobDescription);
-            updatedRepairJob.setJobPrice(repairJobDto.jobPrice);
             repairJobRepos.save(updatedRepairJob);
 
             return updatedRepairJob;

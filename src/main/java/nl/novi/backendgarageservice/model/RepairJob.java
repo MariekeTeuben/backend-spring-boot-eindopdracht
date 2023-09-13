@@ -1,23 +1,23 @@
 package nl.novi.backendgarageservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "repairjobs")
 public class RepairJob {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String jobName;
 
-    private String jobDescription;
-
-    private Double jobPrice;
+    @OneToMany(mappedBy = "repairJob")
+    @JsonIgnore
+    private List<RepairItem> repairItems;
 
     public Long getId() {
         return id;
@@ -35,19 +35,11 @@ public class RepairJob {
         this.jobName = jobName;
     }
 
-    public String getJobDescription() {
-        return jobDescription;
+    public List<RepairItem> getRepairItems() {
+        return repairItems;
     }
 
-    public void setJobDescription(String jobDescription) {
-        this.jobDescription = jobDescription;
-    }
-
-    public Double getJobPrice() {
-        return jobPrice;
-    }
-
-    public void setJobPrice(Double jobPrice) {
-        this.jobPrice = jobPrice;
+    public void setRepairItems(List<RepairItem> repairItems) {
+        this.repairItems = repairItems;
     }
 }

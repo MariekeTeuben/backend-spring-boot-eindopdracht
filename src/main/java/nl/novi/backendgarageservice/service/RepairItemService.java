@@ -3,7 +3,11 @@ package nl.novi.backendgarageservice.service;
 import nl.novi.backendgarageservice.dto.RepairItemDto;
 import nl.novi.backendgarageservice.exception.ResourceNotFoundException;
 import nl.novi.backendgarageservice.model.RepairItem;
+import nl.novi.backendgarageservice.model.RepairJob;
 import nl.novi.backendgarageservice.repository.RepairItemRepository;
+import nl.novi.backendgarageservice.repository.RepairJobRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,9 +17,11 @@ import java.util.Optional;
 @Service
 public class RepairItemService {
     private final RepairItemRepository repairItemRepos;
+    private final RepairJobRepository repairJobRepos;
 
-    public RepairItemService(RepairItemRepository repairItemRepos) {
+    public RepairItemService(RepairItemRepository repairItemRepos, RepairJobRepository repairJobRepos) {
         this.repairItemRepos = repairItemRepos;
+        this.repairJobRepos = repairJobRepos;
     }
 
     public RepairItemDto getRepairItemById(Long id) {
@@ -28,6 +34,8 @@ public class RepairItemService {
         repairItemDto.itemDescription = repairItem.getItemDescription();
         repairItemDto.itemQuantity = repairItem.getItemQuantity();
         repairItemDto.itemPrice = repairItem.getItemPrice();
+        repairItemDto.repairJobId = repairItem.getRepairJob().getId();
+        repairItemDto.repairJob = repairJobRepos.findById(repairItemDto.repairJobId).get();
 
         return repairItemDto;
     }
@@ -44,6 +52,8 @@ public class RepairItemService {
             repairItemDto.itemDescription = repairItem.getItemDescription();
             repairItemDto.itemQuantity = repairItem.getItemQuantity();
             repairItemDto.itemPrice = repairItem.getItemPrice();
+            repairItemDto.repairJobId = repairItem.getRepairJob().getId();
+            repairItemDto.repairJob = repairJobRepos.findById(repairItemDto.repairJobId).get();
 
             repairItemDtoList.add(repairItemDto);
         }
@@ -64,6 +74,9 @@ public class RepairItemService {
         repairItem.setItemDescription(repairItemDto.itemDescription);
         repairItem.setItemQuantity(repairItemDto.itemQuantity);
         repairItem.setItemPrice(repairItemDto.itemPrice);
+
+        RepairJob repairJob = repairJobRepos.findById(repairItemDto.repairJobId).get();
+        repairItem.setRepairJob(repairJob);
 
         repairItemRepos.save(repairItem);
 

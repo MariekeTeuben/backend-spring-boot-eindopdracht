@@ -1,16 +1,13 @@
 package nl.novi.backendgarageservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "repairitems")
 public class RepairItem {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String itemName;
@@ -22,6 +19,10 @@ public class RepairItem {
     private Integer itemQuantity;
 
     private Double itemPrice;
+
+    @ManyToOne
+    @JoinColumn(name="repairJob_id")
+    private RepairJob repairJob;
 
     public Long getId() {
         return id;
@@ -69,5 +70,13 @@ public class RepairItem {
 
     public void setItemPrice(Double itemPrice) {
         this.itemPrice = itemPrice;
+    }
+
+    public RepairJob getRepairJob() {
+        return repairJob;
+    }
+
+    public void setRepairJob(RepairJob repairJob) {
+        this.repairJob = repairJob;
     }
 }

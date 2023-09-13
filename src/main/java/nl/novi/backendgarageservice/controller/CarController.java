@@ -1,6 +1,5 @@
 package nl.novi.backendgarageservice.controller;
 
-import nl.novi.backendgarageservice.dto.AppointmentDto;
 import nl.novi.backendgarageservice.dto.CarDto;
 import nl.novi.backendgarageservice.service.CarService;
 import org.springframework.http.HttpStatus;
