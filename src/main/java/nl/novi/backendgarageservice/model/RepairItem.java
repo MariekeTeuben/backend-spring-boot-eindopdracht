@@ -21,7 +21,6 @@ public class RepairItem {
     private Double itemPrice;
 
     @ManyToOne
-    @JoinColumn(name="repairJob_id")
     private RepairJob repairJob;
 
     public Long getId() {

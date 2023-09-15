@@ -8,4 +8,5 @@ public class RepairJobDto {
     public String jobName;
 
     public ArrayList<String> repairItems = new ArrayList<>();
+
 }

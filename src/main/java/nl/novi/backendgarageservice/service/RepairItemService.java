@@ -6,8 +6,6 @@ import nl.novi.backendgarageservice.model.RepairItem;
 import nl.novi.backendgarageservice.model.RepairJob;
 import nl.novi.backendgarageservice.repository.RepairItemRepository;
 import nl.novi.backendgarageservice.repository.RepairJobRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -79,6 +77,8 @@ public class RepairItemService {
         repairItem.setRepairJob(repairJob);
 
         repairItemRepos.save(repairItem);
+
+        repairItemDto.id = repairItem.getId();
 
         return repairItem.getId();
     }

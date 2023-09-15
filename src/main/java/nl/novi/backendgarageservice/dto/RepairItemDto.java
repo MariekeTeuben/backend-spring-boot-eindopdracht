@@ -22,6 +22,5 @@ public class RepairItemDto {
     public Double itemPrice;
 
     public Long repairJobId;
-
     public RepairJob repairJob;
 }

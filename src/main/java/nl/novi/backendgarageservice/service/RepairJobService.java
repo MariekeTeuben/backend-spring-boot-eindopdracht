@@ -2,8 +2,10 @@ package nl.novi.backendgarageservice.service;
 
 import nl.novi.backendgarageservice.dto.RepairJobDto;
 import nl.novi.backendgarageservice.exception.ResourceNotFoundException;
+import nl.novi.backendgarageservice.model.Invoice;
 import nl.novi.backendgarageservice.model.RepairItem;
 import nl.novi.backendgarageservice.model.RepairJob;
+import nl.novi.backendgarageservice.repository.InvoiceRepository;
 import nl.novi.backendgarageservice.repository.RepairJobRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +17,11 @@ import java.util.Optional;
 public class RepairJobService {
 
     private final RepairJobRepository repairJobRepos;
+    private final InvoiceRepository invoiceRepos;
 
-    public RepairJobService(RepairJobRepository repairJobRepos) {
+    public RepairJobService(RepairJobRepository repairJobRepos, InvoiceRepository invoiceRepos) {
         this.repairJobRepos = repairJobRepos;
+        this.invoiceRepos = invoiceRepos;
     }
 
 
@@ -43,6 +47,10 @@ public class RepairJobService {
 
             repairJobDto.id = repairJob.getId();
             repairJobDto.jobName = repairJob.getJobName();
+
+            for (RepairItem repairItem : repairJob.getRepairItems()) {
+                repairJobDto.repairItems.add(repairItem.getItemName());
+            }
 
             repairJobDtoList.add(repairJobDto);
         }
