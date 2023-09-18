@@ -53,7 +53,7 @@ public class RepairItemController {
 
             repairItemDto.id = newId;
 
-            return ResponseEntity.created(uri).body(repairItemDto);
+            return ResponseEntity.created(uri).body(repairItemService.getRepairItemById(newId));
         }
     }
 

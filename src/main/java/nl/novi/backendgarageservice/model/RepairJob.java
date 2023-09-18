@@ -15,6 +15,9 @@ public class RepairJob {
 
     private String jobName;
 
+    @ManyToOne
+    private Invoice invoice;
+
     @OneToMany(mappedBy = "repairJob")
     @JsonIgnore
     private List<RepairItem> repairItems;
@@ -33,6 +36,14 @@ public class RepairJob {
 
     public void setJobName(String jobName) {
         this.jobName = jobName;
+    }
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
     }
 
     public List<RepairItem> getRepairItems() {

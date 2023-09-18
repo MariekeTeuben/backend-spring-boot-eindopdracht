@@ -1,10 +1,8 @@
 package nl.novi.backendgarageservice.service;
 
 import nl.novi.backendgarageservice.dto.InvoiceDto;
-import nl.novi.backendgarageservice.dto.RepairJobDto;
 import nl.novi.backendgarageservice.exception.ResourceNotFoundException;
 import nl.novi.backendgarageservice.model.Invoice;
-import nl.novi.backendgarageservice.model.RepairItem;
 import nl.novi.backendgarageservice.model.RepairJob;
 import nl.novi.backendgarageservice.repository.InvoiceRepository;
 import nl.novi.backendgarageservice.repository.RepairJobRepository;
@@ -18,10 +16,12 @@ import java.util.Optional;
 public class InvoiceService {
 
     private final InvoiceRepository invoiceRepos;
+    private final RepairJobRepository repairJobRepos;
 
 
     public InvoiceService(InvoiceRepository invoiceRepos, RepairJobRepository repairJobRepos) {
         this.invoiceRepos = invoiceRepos;
+        this.repairJobRepos = repairJobRepos;
     }
 
     public InvoiceDto getInvoiceById(Long id) {
@@ -32,6 +32,12 @@ public class InvoiceService {
         invoiceDto.date = invoice.getDate();
         invoiceDto.tax = invoice.getTax();
         invoiceDto.total = invoice.getTotal();
+
+        if(invoice.getRepairJobs() != null) {
+            for (RepairJob repairJob : invoice.getRepairJobs()) {
+                invoiceDto.repairJobs.add(repairJob.getJobName());
+            }
+        }
 
         return invoiceDto;
     }
@@ -46,6 +52,12 @@ public class InvoiceService {
             invoiceDto.date = invoice.getDate();
             invoiceDto.tax = invoice.getTax();
             invoiceDto.total = invoice.getTotal();
+
+            if(invoice.getRepairJobs() != null) {
+                for (RepairJob repairJob : invoice.getRepairJobs()) {
+                    invoiceDto.repairJobs.add(repairJob.getJobName());
+                }
+            }
 
             invoiceDtoList.add(invoiceDto);
         }
@@ -95,5 +107,4 @@ public class InvoiceService {
             return "Invoice deleted successfully";
         }
     }
-
 }

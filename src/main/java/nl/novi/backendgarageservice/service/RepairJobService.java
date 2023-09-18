@@ -15,7 +15,6 @@ import java.util.Optional;
 
 @Service
 public class RepairJobService {
-
     private final RepairJobRepository repairJobRepos;
     private final InvoiceRepository invoiceRepos;
 
@@ -32,8 +31,10 @@ public class RepairJobService {
         repairJobDto.id = repairJob.getId();
         repairJobDto.jobName = repairJob.getJobName();
 
-        for (RepairItem repairItem : repairJob.getRepairItems()) {
-            repairJobDto.repairItems.add(repairItem.getItemName());
+        if(repairJob.getRepairItems() != null) {
+            for (RepairItem repairItem : repairJob.getRepairItems()) {
+                repairJobDto.repairItems.add(repairItem.getItemName());
+            }
         }
 
         return repairJobDto;
@@ -48,8 +49,10 @@ public class RepairJobService {
             repairJobDto.id = repairJob.getId();
             repairJobDto.jobName = repairJob.getJobName();
 
-            for (RepairItem repairItem : repairJob.getRepairItems()) {
-                repairJobDto.repairItems.add(repairItem.getItemName());
+            if(repairJob.getRepairItems() != null) {
+                for (RepairItem repairItem : repairJob.getRepairItems()) {
+                    repairJobDto.repairItems.add(repairItem.getItemName());
+                }
             }
 
             repairJobDtoList.add(repairJobDto);
@@ -68,7 +71,12 @@ public class RepairJobService {
 
         repairJob.setJobName(repairJobDto.jobName);
 
+        Invoice invoice = invoiceRepos.findById(repairJobDto.invoiceId).get();
+        repairJob.setInvoice(invoice);
+
         repairJobRepos.save(repairJob);
+
+        repairJobDto.id = repairJob.getId();
 
         return repairJob.getId();
     }

@@ -20,6 +20,10 @@ public class Invoice {
 
     private Double total;
 
+    @OneToMany(mappedBy = "invoice")
+    @JsonIgnore
+    private List<RepairJob> repairJobs;
+
     public Long getId() {
         return id;
     }
@@ -42,6 +46,14 @@ public class Invoice {
 
     public void setTax(Double tax) {
         this.tax = tax;
+    }
+
+    public List<RepairJob> getRepairJobs() {
+        return repairJobs;
+    }
+
+    public void setRepairJobs(List<RepairJob> repairJobs) {
+        this.repairJobs = repairJobs;
     }
 
     public Double getTotal() {

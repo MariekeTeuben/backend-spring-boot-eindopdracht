@@ -51,7 +51,7 @@ public class InvoiceController {
 
             invoiceDto.id = newId;
 
-            return ResponseEntity.created(uri).body(invoiceDto);
+            return ResponseEntity.created(uri).body(invoiceService.getInvoiceById(newId));
         }
     }
 

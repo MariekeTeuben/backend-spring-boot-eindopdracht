@@ -9,4 +9,5 @@ public class RepairJobDto {
 
     public ArrayList<String> repairItems = new ArrayList<>();
 
+    public Long invoiceId;
 }
