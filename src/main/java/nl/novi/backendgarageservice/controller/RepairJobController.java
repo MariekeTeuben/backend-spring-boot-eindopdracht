@@ -52,7 +52,7 @@ public class RepairJobController {
 
             repairJobDto.id = newId;
 
-            return ResponseEntity.created(uri).body(repairJobService.getRepairJobById(newId));
+            return ResponseEntity.created(uri).body("RepairJob created successfully");
         }
     }
 

@@ -20,6 +20,9 @@ public class Appointment {
     @Enumerated(EnumType.STRING)
     private AppointmentType appointmentType;
 
+    @ManyToOne
+    private User user;
+
     public Long getId() {
         return id;
     }
@@ -50,5 +53,13 @@ public class Appointment {
 
     public void setAppointmentType(AppointmentType appointmenttype) {
         this.appointmentType = appointmenttype;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

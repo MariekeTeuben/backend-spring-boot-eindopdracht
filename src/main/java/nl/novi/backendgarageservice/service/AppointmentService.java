@@ -3,7 +3,9 @@ package nl.novi.backendgarageservice.service;
 import nl.novi.backendgarageservice.dto.AppointmentDto;
 import nl.novi.backendgarageservice.exception.ResourceNotFoundException;
 import nl.novi.backendgarageservice.model.Appointment;
+import nl.novi.backendgarageservice.model.User;
 import nl.novi.backendgarageservice.repository.AppointmentRepository;
+import nl.novi.backendgarageservice.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,9 +16,11 @@ import java.util.Optional;
 public class AppointmentService {
 
     private final AppointmentRepository appointmentRepos;
+    private final UserRepository userRepos;
 
-    public AppointmentService(AppointmentRepository appointmentRepos) {
+    public AppointmentService(AppointmentRepository appointmentRepos, UserRepository userRepos) {
         this.appointmentRepos = appointmentRepos;
+        this.userRepos = userRepos;
     }
 
     public AppointmentDto getAppointmentById(Long id) {
@@ -27,6 +31,7 @@ public class AppointmentService {
         appointmentDto.appointmentDate = appointment.getAppointmentDate();
         appointmentDto.appointmentTime = appointment.getAppointmentTime();
         appointmentDto.appointmentType = appointment.getAppointmentType();
+        appointmentDto.userName = appointment.getUser().getUsername();
 
         return appointmentDto;
     }
@@ -41,6 +46,7 @@ public class AppointmentService {
             appointmentDto.appointmentDate = appointment.getAppointmentDate();
             appointmentDto.appointmentTime = appointment.getAppointmentTime();
             appointmentDto.appointmentType = appointment.getAppointmentType();
+            appointmentDto.userName = appointment.getUser().getUsername();
 
             appointmentDtoList.add(appointmentDto);
         }
@@ -59,6 +65,9 @@ public class AppointmentService {
         appointment.setAppointmentDate(appointmentDto.appointmentDate);
         appointment.setAppointmentTime(appointmentDto.appointmentTime);
         appointment.setAppointmentType(appointmentDto.appointmentType);
+
+        User user = userRepos.findById(appointmentDto.userName).get();
+        appointment.setUser(user);
 
         appointmentRepos.save(appointment);
 

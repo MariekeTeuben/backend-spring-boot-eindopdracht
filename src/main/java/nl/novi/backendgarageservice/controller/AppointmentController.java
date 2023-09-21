@@ -52,7 +52,7 @@ public class AppointmentController {
 
             appointmentDto.id = newId;
 
-            return ResponseEntity.created(uri).body(appointmentDto);
+            return ResponseEntity.created(uri).body("Appointment created successfully");
         }
 
     }

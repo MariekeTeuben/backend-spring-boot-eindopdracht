@@ -16,12 +16,10 @@ import java.util.Optional;
 public class InvoiceService {
 
     private final InvoiceRepository invoiceRepos;
-    private final RepairJobRepository repairJobRepos;
 
 
-    public InvoiceService(InvoiceRepository invoiceRepos, RepairJobRepository repairJobRepos) {
+    public InvoiceService(InvoiceRepository invoiceRepos) {
         this.invoiceRepos = invoiceRepos;
-        this.repairJobRepos = repairJobRepos;
     }
 
     public InvoiceDto getInvoiceById(Long id) {
@@ -77,6 +75,8 @@ public class InvoiceService {
         invoice.setTotal(invoiceDto.total);
 
         invoiceRepos.save(invoice);
+
+        invoiceDto.id = invoice.getId();
 
         return invoice.getId();
     }

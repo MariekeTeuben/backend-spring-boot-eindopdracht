@@ -20,7 +20,9 @@ public class InvoiceController {
 
     private final InvoiceService invoiceService;
 
-    public InvoiceController(InvoiceService invoiceService) {this.invoiceService = invoiceService;}
+    public InvoiceController(InvoiceService invoiceService) {
+        this.invoiceService = invoiceService;
+    }
 
     @GetMapping
     public ResponseEntity<ArrayList<InvoiceDto>> getAllInvoices() {
@@ -51,7 +53,7 @@ public class InvoiceController {
 
             invoiceDto.id = newId;
 
-            return ResponseEntity.created(uri).body(invoiceService.getInvoiceById(newId));
+            return ResponseEntity.created(uri).body("Invoice created successfully");
         }
     }
 

@@ -13,5 +13,4 @@ public class InvoiceDto {
     public Double total;
 
     public ArrayList<String> repairJobs = new ArrayList<>();
-
 }

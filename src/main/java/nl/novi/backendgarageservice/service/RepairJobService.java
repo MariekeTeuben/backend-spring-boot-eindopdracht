@@ -30,6 +30,9 @@ public class RepairJobService {
         RepairJobDto repairJobDto = new RepairJobDto();
         repairJobDto.id = repairJob.getId();
         repairJobDto.jobName = repairJob.getJobName();
+        repairJobDto.invoice = repairJob.getInvoice();
+        repairJobDto.invoiceId = repairJob.getInvoice().getId();
+
 
         if(repairJob.getRepairItems() != null) {
             for (RepairItem repairItem : repairJob.getRepairItems()) {
@@ -48,6 +51,8 @@ public class RepairJobService {
 
             repairJobDto.id = repairJob.getId();
             repairJobDto.jobName = repairJob.getJobName();
+            repairJobDto.invoice = repairJob.getInvoice();
+            repairJobDto.invoiceId = repairJob.getInvoice().getId();
 
             if(repairJob.getRepairItems() != null) {
                 for (RepairItem repairItem : repairJob.getRepairItems()) {
