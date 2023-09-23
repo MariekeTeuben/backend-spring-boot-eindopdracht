@@ -22,7 +22,10 @@ public class Invoice {
 
     @OneToMany(mappedBy = "invoice")
     @JsonIgnore
-    private List<RepairJob> repairJobs;
+    private List<RepairItem> repairItems;
+
+    @ManyToOne
+    private User user;
 
     public Long getId() {
         return id;
@@ -48,12 +51,12 @@ public class Invoice {
         this.tax = tax;
     }
 
-    public List<RepairJob> getRepairJobs() {
-        return repairJobs;
+    public List<RepairItem> getRepairItems() {
+        return repairItems;
     }
 
-    public void setRepairJobs(List<RepairJob> repairJobs) {
-        this.repairJobs = repairJobs;
+    public void setRepairItems(List<RepairItem> repairItems) {
+        this.repairItems = repairItems;
     }
 
     public Double getTotal() {
@@ -62,5 +65,13 @@ public class Invoice {
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

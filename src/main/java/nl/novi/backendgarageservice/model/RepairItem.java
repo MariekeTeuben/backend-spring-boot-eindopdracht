@@ -21,7 +21,7 @@ public class RepairItem {
     private Double itemPrice;
 
     @ManyToOne
-    private RepairJob repairJob;
+    private Invoice invoice;
 
     public Long getId() {
         return id;
@@ -71,11 +71,11 @@ public class RepairItem {
         this.itemPrice = itemPrice;
     }
 
-    public RepairJob getRepairJob() {
-        return repairJob;
+    public Invoice getInvoice() {
+        return invoice;
     }
 
-    public void setRepairJob(RepairJob repairJob) {
-        this.repairJob = repairJob;
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
     }
 }

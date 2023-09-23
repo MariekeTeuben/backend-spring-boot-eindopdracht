@@ -1,9 +1,7 @@
 package nl.novi.backendgarageservice.dto;
 
 import jakarta.validation.constraints.NotNull;
-import nl.novi.backendgarageservice.model.RepairJob;
-
-import java.util.ArrayList;
+import nl.novi.backendgarageservice.model.Invoice;
 
 public class RepairItemDto {
     public Long id;
@@ -21,7 +19,7 @@ public class RepairItemDto {
     @NotNull
     public Double itemPrice;
 
-    public Long repairJobId;
+    public Invoice invoice;
 
-    public RepairJob repairJob;
+    public Long invoiceId;
 }

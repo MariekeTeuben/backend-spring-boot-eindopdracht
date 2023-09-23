@@ -20,6 +20,7 @@ public class Appointment {
     @Enumerated(EnumType.STRING)
     private AppointmentType appointmentType;
 
+
     @ManyToOne
     private User user;
 

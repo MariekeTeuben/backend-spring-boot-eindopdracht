@@ -3,6 +3,7 @@ package nl.novi.backendgarageservice.service;
 import nl.novi.backendgarageservice.dto.AppointmentDto;
 import nl.novi.backendgarageservice.exception.ResourceNotFoundException;
 import nl.novi.backendgarageservice.model.Appointment;
+import nl.novi.backendgarageservice.model.Car;
 import nl.novi.backendgarageservice.model.User;
 import nl.novi.backendgarageservice.repository.AppointmentRepository;
 import nl.novi.backendgarageservice.repository.UserRepository;

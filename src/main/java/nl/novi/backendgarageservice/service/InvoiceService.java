@@ -3,9 +3,10 @@ package nl.novi.backendgarageservice.service;
 import nl.novi.backendgarageservice.dto.InvoiceDto;
 import nl.novi.backendgarageservice.exception.ResourceNotFoundException;
 import nl.novi.backendgarageservice.model.Invoice;
-import nl.novi.backendgarageservice.model.RepairJob;
+import nl.novi.backendgarageservice.model.RepairItem;
+import nl.novi.backendgarageservice.model.User;
 import nl.novi.backendgarageservice.repository.InvoiceRepository;
-import nl.novi.backendgarageservice.repository.RepairJobRepository;
+import nl.novi.backendgarageservice.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,10 +17,12 @@ import java.util.Optional;
 public class InvoiceService {
 
     private final InvoiceRepository invoiceRepos;
+    private final UserRepository userRepos;
 
 
-    public InvoiceService(InvoiceRepository invoiceRepos) {
+    public InvoiceService(InvoiceRepository invoiceRepos, UserRepository userRepos) {
         this.invoiceRepos = invoiceRepos;
+        this.userRepos = userRepos;
     }
 
     public InvoiceDto getInvoiceById(Long id) {
@@ -30,10 +33,11 @@ public class InvoiceService {
         invoiceDto.date = invoice.getDate();
         invoiceDto.tax = invoice.getTax();
         invoiceDto.total = invoice.getTotal();
+        invoiceDto.username = invoice.getUser().getUsername();
 
-        if(invoice.getRepairJobs() != null) {
-            for (RepairJob repairJob : invoice.getRepairJobs()) {
-                invoiceDto.repairJobs.add(repairJob.getJobName());
+        if(invoice.getRepairItems() != null) {
+            for (RepairItem repairItem : invoice.getRepairItems()) {
+                invoiceDto.repairItems.add(repairItem.getItemName());
             }
         }
 
@@ -50,10 +54,11 @@ public class InvoiceService {
             invoiceDto.date = invoice.getDate();
             invoiceDto.tax = invoice.getTax();
             invoiceDto.total = invoice.getTotal();
+            invoiceDto.username = invoice.getUser().getUsername();
 
-            if(invoice.getRepairJobs() != null) {
-                for (RepairJob repairJob : invoice.getRepairJobs()) {
-                    invoiceDto.repairJobs.add(repairJob.getJobName());
+            if(invoice.getRepairItems() != null) {
+                for (RepairItem repairItem : invoice.getRepairItems()) {
+                    invoiceDto.repairItems.add(repairItem.getItemName());
                 }
             }
 
@@ -73,6 +78,9 @@ public class InvoiceService {
         invoice.setDate(invoiceDto.date);
         invoice.setTax(invoiceDto.tax);
         invoice.setTotal(invoiceDto.total);
+
+        User user = userRepos.findById(invoiceDto.username).get();
+        invoice.setUser(user);
 
         invoiceRepos.save(invoice);
 

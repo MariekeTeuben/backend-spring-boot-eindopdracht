@@ -19,7 +19,13 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     @JsonIgnore
+    private List<Car> cars;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Appointment> appointments;
+    @OneToMany(mappedBy = "user" )
+    @JsonIgnore
+    private List<Invoice> invoices;
 
     public String getUsername() {
         return username;
@@ -37,11 +43,27 @@ public class User {
         this.password = password;
     }
 
+    public List<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
+    }
+
     public List<Appointment> getAppointments() {
         return appointments;
     }
 
     public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
+    }
+
+    public List<Invoice> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(List<Invoice> invoices) {
+        this.invoices = invoices;
     }
 }

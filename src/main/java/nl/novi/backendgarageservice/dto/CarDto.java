@@ -1,7 +1,9 @@
 package nl.novi.backendgarageservice.dto;
 
-import nl.novi.backendgarageservice.model.CarStatus;
-import nl.novi.backendgarageservice.model.CarType;
+import nl.novi.backendgarageservice.model.*;
+
+
+import java.time.LocalDate;
 
 public class CarDto {
     public String licensePlate;
@@ -15,4 +17,7 @@ public class CarDto {
     public String carColor;
 
     public CarStatus carStatus;
+
+    public String userName;
+
 }

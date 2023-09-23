@@ -21,6 +21,9 @@ public class Car {
     @Enumerated(EnumType.STRING)
     private CarStatus carStatus;
 
+    @ManyToOne
+    private User user;
+
     public String getLicensePlate() {
         return licensePlate;
     }
@@ -67,6 +70,14 @@ public class Car {
 
     public void setCarStatus(CarStatus carStatus) {
         this.carStatus = carStatus;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
 

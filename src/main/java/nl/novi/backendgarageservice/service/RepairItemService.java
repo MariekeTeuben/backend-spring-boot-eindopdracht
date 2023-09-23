@@ -2,10 +2,10 @@ package nl.novi.backendgarageservice.service;
 
 import nl.novi.backendgarageservice.dto.RepairItemDto;
 import nl.novi.backendgarageservice.exception.ResourceNotFoundException;
+import nl.novi.backendgarageservice.model.Invoice;
 import nl.novi.backendgarageservice.model.RepairItem;
-import nl.novi.backendgarageservice.model.RepairJob;
+import nl.novi.backendgarageservice.repository.InvoiceRepository;
 import nl.novi.backendgarageservice.repository.RepairItemRepository;
-import nl.novi.backendgarageservice.repository.RepairJobRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,11 +15,12 @@ import java.util.Optional;
 @Service
 public class RepairItemService {
     private final RepairItemRepository repairItemRepos;
-    private final RepairJobRepository repairJobRepos;
+    private final InvoiceRepository invoiceRepos;
 
-    public RepairItemService(RepairItemRepository repairItemRepos, RepairJobRepository repairJobRepos) {
+
+    public RepairItemService(RepairItemRepository repairItemRepos, InvoiceRepository invoiceRepos) {
         this.repairItemRepos = repairItemRepos;
-        this.repairJobRepos = repairJobRepos;
+        this.invoiceRepos = invoiceRepos;
     }
 
     public RepairItemDto getRepairItemById(Long id) {
@@ -32,8 +33,8 @@ public class RepairItemService {
         repairItemDto.itemDescription = repairItem.getItemDescription();
         repairItemDto.itemQuantity = repairItem.getItemQuantity();
         repairItemDto.itemPrice = repairItem.getItemPrice();
-        repairItemDto.repairJobId = repairItem.getRepairJob().getId();
-        repairItemDto.repairJob = repairJobRepos.findById(repairItemDto.repairJobId).get();
+        repairItemDto.invoiceId = repairItem.getInvoice().getId();
+        repairItemDto.invoice = invoiceRepos.findById(repairItemDto.invoiceId).get();
 
         return repairItemDto;
     }
@@ -50,8 +51,8 @@ public class RepairItemService {
             repairItemDto.itemDescription = repairItem.getItemDescription();
             repairItemDto.itemQuantity = repairItem.getItemQuantity();
             repairItemDto.itemPrice = repairItem.getItemPrice();
-            repairItemDto.repairJobId = repairItem.getRepairJob().getId();
-            repairItemDto.repairJob = repairJobRepos.findById(repairItemDto.repairJobId).get();
+            repairItemDto.invoiceId = repairItem.getInvoice().getId();
+            repairItemDto.invoice = invoiceRepos.findById(repairItemDto.invoiceId).get();
 
             repairItemDtoList.add(repairItemDto);
         }
@@ -73,8 +74,8 @@ public class RepairItemService {
         repairItem.setItemQuantity(repairItemDto.itemQuantity);
         repairItem.setItemPrice(repairItemDto.itemPrice);
 
-        RepairJob repairJob = repairJobRepos.findById(repairItemDto.repairJobId).get();
-        repairItem.setRepairJob(repairJob);
+        Invoice invoice = invoiceRepos.findById(repairItemDto.invoiceId).get();
+        repairItem.setInvoice(invoice);
 
         repairItemRepos.save(repairItem);
 

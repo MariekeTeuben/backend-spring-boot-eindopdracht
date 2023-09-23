@@ -3,6 +3,8 @@ package nl.novi.backendgarageservice.service;
 import nl.novi.backendgarageservice.dto.UserDto;
 import nl.novi.backendgarageservice.exception.ResourceNotFoundException;
 import nl.novi.backendgarageservice.model.Appointment;
+import nl.novi.backendgarageservice.model.Car;
+import nl.novi.backendgarageservice.model.Invoice;
 import nl.novi.backendgarageservice.model.User;
 import nl.novi.backendgarageservice.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -29,9 +31,21 @@ public class UserService {
         userDto.username = user.getUsername();
         userDto.password = user.getPassword();
 
+        if(user.getCars() != null) {
+            for (Car car : user.getCars()) {
+                userDto.cars.add(car.getLicensePlate());
+            }
+        }
+
         if(user.getAppointments() != null) {
             for (Appointment appointment : user.getAppointments()) {
                 userDto.appointments.add(appointment.getAppointmentDate());
+            }
+        }
+
+        if(user.getInvoices() != null) {
+            for(Invoice invoice : user.getInvoices()) {
+                userDto.invoices.add(invoice.getId());
             }
         }
 
@@ -47,9 +61,21 @@ public class UserService {
             userDto.username = user.getUsername();
             userDto.password = user.getPassword();
 
+            if(user.getCars() != null) {
+                for (Car car : user.getCars()) {
+                    userDto.cars.add(car.getLicensePlate());
+                }
+            }
+
             if(user.getAppointments() != null) {
                 for (Appointment appointment : user.getAppointments()) {
                     userDto.appointments.add(appointment.getAppointmentDate());
+                }
+            }
+
+            if(user.getInvoices() != null) {
+                for(Invoice invoice : user.getInvoices()) {
+                    userDto.invoices.add(invoice.getId());
                 }
             }
 

@@ -2,7 +2,6 @@ package nl.novi.backendgarageservice.dto;
 
 import jakarta.validation.constraints.NotNull;
 import nl.novi.backendgarageservice.model.AppointmentType;
-import nl.novi.backendgarageservice.model.User;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -19,4 +18,5 @@ public class AppointmentDto {
     public AppointmentType appointmentType;
 
     public String userName;
+
 }
