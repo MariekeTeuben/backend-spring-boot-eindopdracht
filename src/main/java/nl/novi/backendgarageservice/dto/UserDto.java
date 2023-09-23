@@ -1,11 +1,8 @@
 package nl.novi.backendgarageservice.dto;
 
-import nl.novi.backendgarageservice.model.Appointment;
-import nl.novi.backendgarageservice.model.Invoice;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class UserDto {
 
