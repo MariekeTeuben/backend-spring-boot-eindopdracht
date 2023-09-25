@@ -21,6 +21,9 @@ public class Car {
     @Enumerated(EnumType.STRING)
     private CarStatus carStatus;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private RegistrationCard registrationCard;
+
     @ManyToOne
     private User user;
 
@@ -78,6 +81,14 @@ public class Car {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public RegistrationCard getRegistrationCard() {
+        return registrationCard;
+    }
+
+    public void setRegistrationCard(RegistrationCard registrationCard) {
+        this.registrationCard = registrationCard;
     }
 }
 

@@ -19,5 +19,4 @@ public class CarDto {
     public CarStatus carStatus;
 
     public String userName;
-
 }

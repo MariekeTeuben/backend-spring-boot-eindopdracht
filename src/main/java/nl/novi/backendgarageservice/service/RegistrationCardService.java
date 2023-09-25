@@ -2,7 +2,6 @@ package nl.novi.backendgarageservice.service;
 
 import nl.novi.backendgarageservice.dto.RegistrationCardDto;
 import nl.novi.backendgarageservice.exception.ResourceNotFoundException;
-import nl.novi.backendgarageservice.model.Car;
 import nl.novi.backendgarageservice.model.RegistrationCard;
 import nl.novi.backendgarageservice.repository.RegistrationCardRepository;
 import org.springframework.stereotype.Service;
@@ -43,7 +42,6 @@ public class RegistrationCardService {
             registrationCardDto.name = registrationCard.getName();
             registrationCardDto.postalCode = registrationCard.getPostalCode();
 
-
             registrationCardDtoList.add(registrationCardDto);
         }
 
@@ -62,8 +60,9 @@ public class RegistrationCardService {
         registrationCard.setName(registrationCardDto.name);
         registrationCard.setPostalCode(registrationCardDto.postalCode);
 
-
         registrationCardRepos.save(registrationCard);
+
+        registrationCardDto.chassisNumber = registrationCard.getChassisNumber();
 
         return registrationCard.getChassisNumber();
     }

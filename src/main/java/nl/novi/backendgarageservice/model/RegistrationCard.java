@@ -1,11 +1,9 @@
 package nl.novi.backendgarageservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "registration")
+@Table(name = "registrations")
 public class RegistrationCard {
 
     @Id
@@ -14,6 +12,9 @@ public class RegistrationCard {
     private String name;
 
     private String postalCode;
+
+    @OneToOne(mappedBy = "registrationCard")
+    private Car car;
 
     public String getChassisNumber() {
         return chassisNumber;
@@ -37,5 +38,13 @@ public class RegistrationCard {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
     }
 }

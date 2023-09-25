@@ -51,7 +51,7 @@ public class CarController {
 
             carDto.licensePlate = newLicensePlate;
 
-            return ResponseEntity.created(uri).body(carDto);
+            return ResponseEntity.created(uri).body("Car created successfully");
         }
     }
 

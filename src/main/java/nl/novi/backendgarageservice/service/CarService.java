@@ -2,10 +2,8 @@ package nl.novi.backendgarageservice.service;
 
 import nl.novi.backendgarageservice.dto.CarDto;
 import nl.novi.backendgarageservice.exception.ResourceNotFoundException;
-import nl.novi.backendgarageservice.model.Appointment;
 import nl.novi.backendgarageservice.model.Car;
 import nl.novi.backendgarageservice.model.User;
-import nl.novi.backendgarageservice.repository.AppointmentRepository;
 import nl.novi.backendgarageservice.repository.CarRepository;
 import nl.novi.backendgarageservice.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -79,6 +77,8 @@ public class CarService {
         car.setUser(user);
 
         carRepos.save(car);
+
+        carDto.licensePlate = car.getLicensePlate();
 
         return car.getLicensePlate();
     }
