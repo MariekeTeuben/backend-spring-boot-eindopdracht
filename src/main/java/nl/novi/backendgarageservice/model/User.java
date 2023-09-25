@@ -1,11 +1,10 @@
 package nl.novi.backendgarageservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
+import javax.management.relation.Role;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -16,6 +15,9 @@ public class User {
     private String username;
 
     private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<Role> roles;
 
     @OneToMany(mappedBy = "user")
     @JsonIgnore

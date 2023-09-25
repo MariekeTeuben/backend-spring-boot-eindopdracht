@@ -10,6 +10,8 @@ public class UserDto {
 
     public String password;
 
+    public String[] roles;
+
     public ArrayList<String> cars = new ArrayList<>();
 
     public ArrayList<LocalDate> appointments = new ArrayList<>();
