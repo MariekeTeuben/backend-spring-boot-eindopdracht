@@ -16,4 +16,7 @@ public class AppointmentDto {
     public LocalTime appointmentTime;
 
     public AppointmentType appointmentType;
+
+    public String userName;
+
 }

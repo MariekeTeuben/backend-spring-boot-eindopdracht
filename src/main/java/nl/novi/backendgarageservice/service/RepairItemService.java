@@ -2,7 +2,9 @@ package nl.novi.backendgarageservice.service;
 
 import nl.novi.backendgarageservice.dto.RepairItemDto;
 import nl.novi.backendgarageservice.exception.ResourceNotFoundException;
+import nl.novi.backendgarageservice.model.Invoice;
 import nl.novi.backendgarageservice.model.RepairItem;
+import nl.novi.backendgarageservice.repository.InvoiceRepository;
 import nl.novi.backendgarageservice.repository.RepairItemRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +15,12 @@ import java.util.Optional;
 @Service
 public class RepairItemService {
     private final RepairItemRepository repairItemRepos;
+    private final InvoiceRepository invoiceRepos;
 
-    public RepairItemService(RepairItemRepository repairItemRepos) {
+
+    public RepairItemService(RepairItemRepository repairItemRepos, InvoiceRepository invoiceRepos) {
         this.repairItemRepos = repairItemRepos;
+        this.invoiceRepos = invoiceRepos;
     }
 
     public RepairItemDto getRepairItemById(Long id) {
@@ -28,6 +33,8 @@ public class RepairItemService {
         repairItemDto.itemDescription = repairItem.getItemDescription();
         repairItemDto.itemQuantity = repairItem.getItemQuantity();
         repairItemDto.itemPrice = repairItem.getItemPrice();
+        repairItemDto.invoiceId = repairItem.getInvoice().getId();
+        repairItemDto.invoice = invoiceRepos.findById(repairItemDto.invoiceId).get();
 
         return repairItemDto;
     }
@@ -44,6 +51,8 @@ public class RepairItemService {
             repairItemDto.itemDescription = repairItem.getItemDescription();
             repairItemDto.itemQuantity = repairItem.getItemQuantity();
             repairItemDto.itemPrice = repairItem.getItemPrice();
+            repairItemDto.invoiceId = repairItem.getInvoice().getId();
+            repairItemDto.invoice = invoiceRepos.findById(repairItemDto.invoiceId).get();
 
             repairItemDtoList.add(repairItemDto);
         }
@@ -65,7 +74,12 @@ public class RepairItemService {
         repairItem.setItemQuantity(repairItemDto.itemQuantity);
         repairItem.setItemPrice(repairItemDto.itemPrice);
 
+        Invoice invoice = invoiceRepos.findById(repairItemDto.invoiceId).get();
+        repairItem.setInvoice(invoice);
+
         repairItemRepos.save(repairItem);
+
+        repairItemDto.id = repairItem.getId();
 
         return repairItem.getId();
     }

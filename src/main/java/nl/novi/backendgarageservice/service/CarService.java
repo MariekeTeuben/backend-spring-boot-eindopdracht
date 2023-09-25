@@ -3,7 +3,9 @@ package nl.novi.backendgarageservice.service;
 import nl.novi.backendgarageservice.dto.CarDto;
 import nl.novi.backendgarageservice.exception.ResourceNotFoundException;
 import nl.novi.backendgarageservice.model.Car;
+import nl.novi.backendgarageservice.model.User;
 import nl.novi.backendgarageservice.repository.CarRepository;
+import nl.novi.backendgarageservice.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,9 +16,11 @@ import java.util.Optional;
 public class CarService {
 
     private final CarRepository carRepos;
+    private final UserRepository userRepos;
 
-    public CarService(CarRepository carRepos) {
+    public CarService(CarRepository carRepos, UserRepository userRepos) {
         this.carRepos = carRepos;
+        this.userRepos = userRepos;
     }
 
     public CarDto getCarByLicensePlate(String licensePlate) {
@@ -29,6 +33,7 @@ public class CarService {
         carDto.carType = car.getCarType();
         carDto.carColor = car.getCarColor();
         carDto.carStatus = car.getCarStatus();
+        carDto.userName = car.getUser().getUsername();
 
         return carDto;
     }
@@ -45,6 +50,7 @@ public class CarService {
             carDto.carType = car.getCarType();
             carDto.carColor = car.getCarColor();
             carDto.carStatus = car.getCarStatus();
+            carDto.userName = car.getUser().getUsername();
 
             carDtoList.add(carDto);
         }
@@ -67,7 +73,12 @@ public class CarService {
         car.setCarColor(carDto.carColor);
         car.setCarStatus(carDto.carStatus);
 
+        User user = userRepos.findById(carDto.userName).get();
+        car.setUser(user);
+
         carRepos.save(car);
+
+        carDto.licensePlate = car.getLicensePlate();
 
         return car.getLicensePlate();
     }
@@ -85,6 +96,7 @@ public class CarService {
             updatedCar.setCarStatus(carDto.carStatus);
 
             carRepos.save(updatedCar);
+
             return updatedCar;
         }
     }

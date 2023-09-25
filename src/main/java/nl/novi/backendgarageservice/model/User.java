@@ -1,9 +1,12 @@
 package nl.novi.backendgarageservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -13,6 +16,16 @@ public class User {
     private String username;
 
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Car> cars;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Appointment> appointments;
+    @OneToMany(mappedBy = "user" )
+    @JsonIgnore
+    private List<Invoice> invoices;
 
     public String getUsername() {
         return username;
@@ -28,5 +41,29 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
+    }
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
+    }
+
+    public List<Invoice> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(List<Invoice> invoices) {
+        this.invoices = invoices;
     }
 }
