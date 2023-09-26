@@ -68,4 +68,15 @@ public class User {
     public void setInvoices(List<Invoice> invoices) {
         this.invoices = invoices;
     }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
+
+    public void setRoles(List<nl.novi.backendgarageservice.model.Role> userRoles) {
+    }
 }
