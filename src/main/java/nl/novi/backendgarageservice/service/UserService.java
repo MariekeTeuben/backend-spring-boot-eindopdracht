@@ -34,6 +34,7 @@ public class UserService {
         userDto.username = user.getUsername();
         userDto.password = user.getPassword();
 
+
         if(user.getCars() != null) {
             for (Car car : user.getCars()) {
                 userDto.cars.add(car.getLicensePlate());

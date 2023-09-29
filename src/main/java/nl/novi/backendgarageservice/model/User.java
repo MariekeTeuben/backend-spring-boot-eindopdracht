@@ -3,7 +3,6 @@ package nl.novi.backendgarageservice.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import javax.management.relation.Role;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class User {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<Role> roles;
+    private Collection<nl.novi.backendgarageservice.model.Role> roles;
 
     @OneToMany(mappedBy = "user")
     @JsonIgnore
@@ -69,14 +68,11 @@ public class User {
         this.invoices = invoices;
     }
 
-    public Collection<Role> getRoles() {
+    public Collection<nl.novi.backendgarageservice.model.Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<Role> roles) {
+    public void setRoles(Collection<nl.novi.backendgarageservice.model.Role> roles) {
         this.roles = roles;
-    }
-
-    public void setRoles(List<nl.novi.backendgarageservice.model.Role> userRoles) {
     }
 }
