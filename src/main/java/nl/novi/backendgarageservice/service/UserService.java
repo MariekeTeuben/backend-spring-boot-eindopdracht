@@ -2,11 +2,10 @@ package nl.novi.backendgarageservice.service;
 
 import nl.novi.backendgarageservice.dto.UserDto;
 import nl.novi.backendgarageservice.exception.ResourceNotFoundException;
-import nl.novi.backendgarageservice.model.Appointment;
-import nl.novi.backendgarageservice.model.Car;
-import nl.novi.backendgarageservice.model.Invoice;
-import nl.novi.backendgarageservice.model.User;
+import nl.novi.backendgarageservice.model.*;
+import nl.novi.backendgarageservice.repository.RoleRepository;
 import nl.novi.backendgarageservice.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,9 +17,13 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepos;
+    private final RoleRepository roleRepos;
+    private final PasswordEncoder encoder;
 
-    public UserService(UserRepository userRepos) {
+    public UserService(UserRepository userRepos, RoleRepository roleRepos, PasswordEncoder encoder) {
         this.userRepos = userRepos;
+        this.roleRepos = roleRepos;
+        this.encoder = encoder;
     }
 
 
@@ -30,6 +33,17 @@ public class UserService {
         UserDto userDto = new UserDto();
         userDto.username = user.getUsername();
         userDto.password = user.getPassword();
+
+
+        // user.getroles -> rollen ophalen
+        // daar overheen itereren
+        // rolnames per stuk er uit halen
+        //in de userdto stoppen
+
+
+        for (Role role : user.getRoles()) {
+            userDto.roles.add(role.getRoleName());
+        }
 
         if(user.getCars() != null) {
             for (Car car : user.getCars()) {
@@ -60,6 +74,10 @@ public class UserService {
 
             userDto.username = user.getUsername();
             userDto.password = user.getPassword();
+
+            for (Role role : user.getRoles()) {
+                userDto.roles.add(role.getRoleName());
+            }
 
             if(user.getCars() != null) {
                 for (Car car : user.getCars()) {
@@ -93,7 +111,16 @@ public class UserService {
         User user = new User();
 
         user.setUsername(userDto.username);
-        user.setPassword(userDto.password);
+        user.setPassword(encoder.encode(userDto.password));
+
+        List<Role> userRoles = new ArrayList<>();
+        for (String rolename : userDto.roles) {
+            Optional<Role> or = roleRepos.findById("ROLE_" + rolename);
+
+            userRoles.add(or.get());
+        }
+
+        user.setRoles(userRoles);
 
         userRepos.save(user);
 
