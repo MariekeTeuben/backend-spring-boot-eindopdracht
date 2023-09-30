@@ -54,20 +54,20 @@ public class SecurityConfig {
                 // --------------------------- USERS ---------------------------
                 .requestMatchers(HttpMethod.POST, "/users").permitAll()
                 .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/users/{username}").permitAll()
-                .requestMatchers(HttpMethod.PUT, "/users/{username}").permitAll()
+                .requestMatchers(HttpMethod.GET, "/users/{username}").hasAnyRole("CUSTOMER", "EMPLOYEE", "ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/users/{username}").hasAnyRole("CUSTOMER", "EMPLOYEE", "ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/users/{username}").hasRole("ADMIN")
                 // --------------------------- CARS ---------------------------
-                .requestMatchers(HttpMethod.POST, "/cars").permitAll()
+                .requestMatchers(HttpMethod.POST, "/cars").hasAnyRole("CUSTOMER", "EMPLOYEE", "ADMIN")
                 .requestMatchers(HttpMethod.GET, "/cars").hasAnyRole("EMPLOYEE", "ADMIN")
-                .requestMatchers(HttpMethod.GET, "/cars/{licensePlate}").permitAll()
-                .requestMatchers(HttpMethod.PUT, "/cars/{licensePlate}").permitAll()
+                .requestMatchers(HttpMethod.GET, "/cars/{licensePlate}").hasAnyRole("CUSTOMER", "EMPLOYEE", "ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/cars/{licensePlate}").hasAnyRole("CUSTOMER", "EMPLOYEE", "ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/cars/{licensePlate}").hasRole("ADMIN")
                 // --------------------------- APPOINTMENTS ---------------------------
-                .requestMatchers(HttpMethod.POST, "/appointments").permitAll()
+                .requestMatchers(HttpMethod.POST, "/appointments").hasAnyRole("CUSTOMER", "EMPLOYEE", "ADMIN")
                 .requestMatchers(HttpMethod.GET, "/appointments").hasAnyRole("EMPLOYEE", "ADMIN")
-                .requestMatchers(HttpMethod.GET, "/appointments/{id}").permitAll()
-                .requestMatchers(HttpMethod.PUT, "/appointments/{id}").permitAll()
+                .requestMatchers(HttpMethod.GET, "/appointments/{id}").hasAnyRole("CUSTOMER", "EMPLOYEE", "ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/appointments/{id}").hasAnyRole("CUSTOMER", "EMPLOYEE", "ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/appointments/{id}").hasRole("ADMIN")
                 // --------------------------- REGISTRATIONCARDS ---------------------------
                 .requestMatchers("/registration/**").hasAnyRole("EMPLOYEE", "ADMIN")
@@ -80,7 +80,7 @@ public class SecurityConfig {
                 // --------------------------- AUTH ---------------------------
                 .requestMatchers(HttpMethod.POST, "/auth").permitAll()
                 .requestMatchers(HttpMethod.GET, "/users/{username}").authenticated()
-                //.requestMatchers("/**").authenticated()
+                .requestMatchers("/**").authenticated()
                 .anyRequest().denyAll()
                 .and()
                 .addFilterBefore(new JwtRequestFilter(jwtService, userDetailsService()), UsernamePasswordAuthenticationFilter.class)

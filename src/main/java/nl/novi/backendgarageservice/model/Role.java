@@ -1,9 +1,6 @@
 package nl.novi.backendgarageservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Collection;
 
@@ -12,6 +9,7 @@ import java.util.Collection;
 public class Role {
 
     @Id
+    @Column(nullable = false)
     private String roleName;
 
     @ManyToMany(mappedBy = "roles")

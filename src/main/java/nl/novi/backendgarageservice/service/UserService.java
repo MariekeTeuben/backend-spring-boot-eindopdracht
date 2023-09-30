@@ -35,6 +35,16 @@ public class UserService {
         userDto.password = user.getPassword();
 
 
+        // user.getroles -> rollen ophalen
+        // daar overheen itereren
+        // rolnames per stuk er uit halen
+        //in de userdto stoppen
+
+
+        for (Role role : user.getRoles()) {
+            userDto.roles.add(role.getRoleName());
+        }
+
         if(user.getCars() != null) {
             for (Car car : user.getCars()) {
                 userDto.cars.add(car.getLicensePlate());
@@ -64,6 +74,10 @@ public class UserService {
 
             userDto.username = user.getUsername();
             userDto.password = user.getPassword();
+
+            for (Role role : user.getRoles()) {
+                userDto.roles.add(role.getRoleName());
+            }
 
             if(user.getCars() != null) {
                 for (Car car : user.getCars()) {
