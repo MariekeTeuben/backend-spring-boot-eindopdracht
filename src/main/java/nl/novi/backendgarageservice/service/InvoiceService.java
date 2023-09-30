@@ -31,15 +31,18 @@ public class InvoiceService {
         InvoiceDto invoiceDto = new InvoiceDto();
         invoiceDto.id = invoice.getId();
         invoiceDto.date = invoice.getDate();
-        invoiceDto.tax = invoice.getTax();
-        invoiceDto.total = invoice.getTotal();
         invoiceDto.username = invoice.getUser().getUsername();
+
+        invoiceDto.totalPrice = 0.0;
 
         if(invoice.getRepairItems() != null) {
             for (RepairItem repairItem : invoice.getRepairItems()) {
+                invoiceDto.totalPrice = invoiceDto.totalPrice + (repairItem.getItemPrice()) * (repairItem.getItemQuantity());
                 invoiceDto.repairItems.add(repairItem.getItemName());
             }
         }
+
+        invoiceDto.tax = invoiceDto.totalPrice * 0.21;
 
         return invoiceDto;
     }
@@ -52,15 +55,18 @@ public class InvoiceService {
 
             invoiceDto.id = invoice.getId();
             invoiceDto.date = invoice.getDate();
-            invoiceDto.tax = invoice.getTax();
-            invoiceDto.total = invoice.getTotal();
             invoiceDto.username = invoice.getUser().getUsername();
+
+            invoiceDto.totalPrice = 0.0;
 
             if(invoice.getRepairItems() != null) {
                 for (RepairItem repairItem : invoice.getRepairItems()) {
+                    invoiceDto.totalPrice = invoiceDto.totalPrice + (repairItem.getItemPrice()) * (repairItem.getItemQuantity());
                     invoiceDto.repairItems.add(repairItem.getItemName());
                 }
             }
+
+            invoiceDto.tax = invoiceDto.totalPrice * 0.21;
 
             invoiceDtoList.add(invoiceDto);
         }
@@ -76,8 +82,6 @@ public class InvoiceService {
         Invoice invoice = new Invoice();
 
         invoice.setDate(invoiceDto.date);
-        invoice.setTax(invoiceDto.tax);
-        invoice.setTotal(invoiceDto.total);
 
         User user = userRepos.findById(invoiceDto.username).get();
         invoice.setUser(user);
@@ -96,8 +100,6 @@ public class InvoiceService {
         } else {
             Invoice updatedInvoice = invoice.get();
             updatedInvoice.setDate(invoiceDto.date);
-            updatedInvoice.setTax(invoiceDto.tax);
-            updatedInvoice.setTotal(invoiceDto.total);
 
             invoiceRepos.save(updatedInvoice);
 

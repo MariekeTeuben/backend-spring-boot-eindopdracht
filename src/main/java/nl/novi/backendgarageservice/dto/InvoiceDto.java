@@ -12,7 +12,7 @@ public class InvoiceDto {
 
     public Double tax;
 
-    public Double total;
+    public Double totalPrice;
 
     public ArrayList<String> repairItems = new ArrayList<>();
 
