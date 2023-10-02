@@ -71,6 +71,8 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "/appointments/{id}").hasRole("ADMIN")
                 // --------------------------- REGISTRATIONCARDS ---------------------------
                 .requestMatchers("/registration/**").hasAnyRole("EMPLOYEE", "ADMIN")
+                // --------------------------- FILES ---------------------------
+                .requestMatchers("/files/**").hasAnyRole("EMPLOYEE", "ADMIN")
                 // --------------------------- INVOICES ---------------------------
                 .requestMatchers("/invoices/**").hasAnyRole("EMPLOYEE", "ADMIN")
                 // --------------------------- REPAIRITEMS ---------------------------

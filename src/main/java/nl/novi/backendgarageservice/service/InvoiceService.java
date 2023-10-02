@@ -96,7 +96,7 @@ public class InvoiceService {
     public Object updateInvoice(Long id, InvoiceDto invoiceDto) {
         Optional<Invoice> invoice = invoiceRepos.findById(id);
         if (invoice.isEmpty()) {
-            throw new ResourceNotFoundException("No invoice with id:" + id);
+            throw new ResourceNotFoundException("No invoice with id: " + id);
         } else {
             Invoice updatedInvoice = invoice.get();
             updatedInvoice.setDate(invoiceDto.date);
