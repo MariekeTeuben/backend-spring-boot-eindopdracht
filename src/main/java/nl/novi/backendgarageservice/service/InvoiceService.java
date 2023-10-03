@@ -37,12 +37,12 @@ public class InvoiceService {
 
         if(invoice.getRepairItems() != null) {
             for (RepairItem repairItem : invoice.getRepairItems()) {
-                invoiceDto.totalPrice = invoiceDto.totalPrice + (repairItem.getItemPrice()) * (repairItem.getItemQuantity());
+                invoiceDto.totalPrice = invoiceDto.totalPrice + (double) (Math.round((repairItem.getItemPrice() * repairItem.getItemQuantity()) * 100.0) / 100.0);
                 invoiceDto.repairItems.add(repairItem.getItemName());
             }
         }
 
-        invoiceDto.tax = invoiceDto.totalPrice * 0.21;
+        invoiceDto.tax = (double) (Math.round((invoiceDto.totalPrice * 0.21) * 100.0) / 100.0);
 
         return invoiceDto;
     }
@@ -61,12 +61,13 @@ public class InvoiceService {
 
             if(invoice.getRepairItems() != null) {
                 for (RepairItem repairItem : invoice.getRepairItems()) {
-                    invoiceDto.totalPrice = invoiceDto.totalPrice + (repairItem.getItemPrice()) * (repairItem.getItemQuantity());
+                    invoiceDto.totalPrice = invoiceDto.totalPrice + (double) (Math.round((repairItem.getItemPrice() * repairItem.getItemQuantity()) * 100.0) / 100.0);
+
                     invoiceDto.repairItems.add(repairItem.getItemName());
                 }
             }
 
-            invoiceDto.tax = invoiceDto.totalPrice * 0.21;
+            invoiceDto.tax = (double) (Math.round((invoiceDto.totalPrice * 0.21) * 100.0) / 100.0);
 
             invoiceDtoList.add(invoiceDto);
         }
