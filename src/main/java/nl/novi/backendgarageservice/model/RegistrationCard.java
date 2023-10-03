@@ -2,6 +2,8 @@ package nl.novi.backendgarageservice.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "registrations")
 public class RegistrationCard {
@@ -15,6 +17,9 @@ public class RegistrationCard {
 
     @OneToOne(mappedBy = "registrationCard")
     private Car car;
+
+    @OneToMany(mappedBy = "registrationCard")
+    private List<File> fileList;
 
     public String getChassisNumber() {
         return chassisNumber;
@@ -46,5 +51,13 @@ public class RegistrationCard {
 
     public void setCar(Car car) {
         this.car = car;
+    }
+
+    public List<File> getFileList() {
+        return fileList;
+    }
+
+    public void setFileList(List<File> fileList) {
+        this.fileList = fileList;
     }
 }

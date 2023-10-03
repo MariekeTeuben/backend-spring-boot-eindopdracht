@@ -16,9 +16,6 @@ public class Invoice {
 
     private LocalDate date;
 
-    private Double tax;
-
-    private Double total;
 
     @OneToMany(mappedBy = "invoice")
     @JsonIgnore
@@ -43,13 +40,6 @@ public class Invoice {
         this.date = date;
     }
 
-    public Double getTax() {
-        return tax;
-    }
-
-    public void setTax(Double tax) {
-        this.tax = tax;
-    }
 
     public List<RepairItem> getRepairItems() {
         return repairItems;
@@ -57,14 +47,6 @@ public class Invoice {
 
     public void setRepairItems(List<RepairItem> repairItems) {
         this.repairItems = repairItems;
-    }
-
-    public Double getTotal() {
-        return total;
-    }
-
-    public void setTotal(Double total) {
-        this.total = total;
     }
 
     public User getUser() {

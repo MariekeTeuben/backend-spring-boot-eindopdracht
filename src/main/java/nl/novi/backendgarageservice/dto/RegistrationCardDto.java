@@ -1,14 +1,16 @@
 package nl.novi.backendgarageservice.dto;
 
 
-import nl.novi.backendgarageservice.model.Car;
+import jakarta.validation.constraints.NotBlank;
 
 public class RegistrationCardDto {
 
+    @NotBlank
     public String chassisNumber;
 
+    @NotBlank
     public String name;
 
+    @NotBlank
     public String postalCode;
-
 }

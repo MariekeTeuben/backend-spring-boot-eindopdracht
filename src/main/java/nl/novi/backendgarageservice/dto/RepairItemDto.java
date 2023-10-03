@@ -1,12 +1,13 @@
 package nl.novi.backendgarageservice.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import nl.novi.backendgarageservice.model.Invoice;
 
 public class RepairItemDto {
     public Long id;
 
-    @NotNull
+    @NotBlank
     public String itemName;
 
     public String itemType;
