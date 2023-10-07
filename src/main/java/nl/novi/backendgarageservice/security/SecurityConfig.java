@@ -74,7 +74,7 @@ public class SecurityConfig {
                 // --------------------------- FILES ---------------------------
                 .requestMatchers("/files/**").hasAnyRole("EMPLOYEE", "ADMIN")
                 // --------------------------- INVOICES ---------------------------
-                .requestMatchers("/invoices").hasAnyRole("EMPLOYEE", "ADMIN")
+                .requestMatchers("/invoices/**").hasAnyRole("EMPLOYEE", "ADMIN")
                 // --------------------------- REPAIRITEMS ---------------------------
                 .requestMatchers("/repairitems/**").hasAnyRole("EMPLOYEE", "ADMIN")
                 // --------------------------- ROLES ---------------------------

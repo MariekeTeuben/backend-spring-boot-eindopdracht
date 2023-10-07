@@ -24,7 +24,7 @@ public class CarService {
     }
 
     public CarDto getCarByLicensePlate(String licensePlate) {
-        Car car = carRepos.findById(licensePlate).orElseThrow(() -> new ResourceNotFoundException("Car cannot be found"));
+        Car car = carRepos.findByLicensePlate(licensePlate).orElseThrow(() -> new ResourceNotFoundException("Car cannot be found"));
 
         CarDto carDto = new CarDto();
         carDto.licensePlate = car.getLicensePlate();
@@ -84,7 +84,7 @@ public class CarService {
     }
 
     public Object updateCar(String licensePlate, CarDto carDto) {
-        Optional<Car> car = carRepos.findById(licensePlate);
+        Optional<Car> car = carRepos.findByLicensePlate(licensePlate);
         if (car.isEmpty()) {
             throw new ResourceNotFoundException("No car with license plate:" + licensePlate);
         } else {

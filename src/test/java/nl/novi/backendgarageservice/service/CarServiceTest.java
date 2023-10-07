@@ -165,43 +165,48 @@ class CarServiceTest {
         assertEquals(carDto5.userName, savedCar.getUser().getUsername());
     }
 
-//    @Test
-//    void updateCar() {
-//        String licensePlate = "PZ-897-N";
-//        CarDto carDto5 = new CarDto();
-//        carDto5.licensePlate = "PZ-897-N";
-//        carDto5.carBrand = "Mini";
-//        carDto5.carModel = "Cooper";
-//        carDto5.carType = CarType.COUPE;
-//        carDto5.carColor = "black";
-//        carDto5.carStatus = CarStatus.INSPECTION;
-//        carDto5.userName = "maarten";
-//
-//        Car existingCar = new Car();
-//        existingCar.setLicensePlate(licensePlate);
-//        existingCar.setCarBrand("Vorige");
-//        existingCar.setCarModel("Model");
-//        existingCar.setCarType(CarType.MPV);
-//        existingCar.setCarColor("red");
-//        existingCar.setCarStatus(CarStatus.CHECKED_IN);
-//        existingCar.setUser(existingCar.getUser());
-//
-//        when(carRepos.findByLicensePlate(licensePlate)).thenReturn(Optional.of(existingCar));
-//        when(carRepos.save(any(Car.class))).thenReturn(existingCar);
-//
-//        CarDto updatedCar = (CarDto) carService.updateCar(licensePlate, carDto5);
-//        verify(carRepos, times(1)).findById(licensePlate);
-//        verify(carRepos, times(1)).save(any(Car.class));
-//
-//        assertNotNull(updatedCar);
-//        assertEquals(carDto5.licensePlate, updatedCar.licensePlate);
-//        assertEquals(carDto5.carBrand, updatedCar.carBrand);
-//        assertEquals(carDto5.carModel, updatedCar.carModel);
-//        assertEquals(carDto5.carType, updatedCar.carType);
-//        assertEquals(carDto5.carColor, updatedCar.carColor);
-//        assertEquals(carDto5.carStatus, updatedCar.carStatus);
-//        assertEquals(carDto5.userName, updatedCar.userName);
-//    }
+    @Test
+    void updateCar() {
+        String licensePlate = "XH-781-F";
+        CarDto carDto5 = new CarDto();
+        carDto5.licensePlate = "XH-781-F";
+        carDto5.carBrand = "Mini";
+        carDto5.carModel = "Cooper";
+        carDto5.carType = CarType.COUPE;
+        carDto5.carColor = "black";
+        carDto5.carStatus = CarStatus.INSPECTION;
+        carDto5.userName = "maarten";
+
+        User user = new User();
+        user.setUsername("maarten");
+
+        Car existingCar = new Car();
+        existingCar.setLicensePlate(licensePlate);
+        existingCar.setCarBrand("Vorige");
+        existingCar.setCarModel("Model");
+        existingCar.setCarType(CarType.MPV);
+        existingCar.setCarColor("red");
+        existingCar.setCarStatus(CarStatus.CHECKED_IN);
+        existingCar.setUser(user);
+
+        when(carRepos.findByLicensePlate(licensePlate)).thenReturn(Optional.of(existingCar));
+        when(carRepos.save(any(Car.class))).thenReturn(existingCar);
+
+        carService.updateCar(licensePlate, carDto5);
+        CarDto updatedCar = carService.getCarByLicensePlate(carDto5.licensePlate);
+
+        verify(carRepos, times(2)).findByLicensePlate(licensePlate);
+        verify(carRepos, times(1)).save(any(Car.class));
+
+        assertNotNull(updatedCar);
+        assertEquals(carDto5.licensePlate, updatedCar.licensePlate);
+        assertEquals(carDto5.carBrand, updatedCar.carBrand);
+        assertEquals(carDto5.carModel, updatedCar.carModel);
+        assertEquals(carDto5.carType, updatedCar.carType);
+        assertEquals(carDto5.carColor, updatedCar.carColor);
+        assertEquals(carDto5.carStatus, updatedCar.carStatus);
+        assertEquals(carDto5.userName, updatedCar.userName);
+    }
 
     @Test
     void deleteCar() {

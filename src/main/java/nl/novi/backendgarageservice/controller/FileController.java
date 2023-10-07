@@ -21,10 +21,6 @@ public class FileController {
         this.fileService = fileService;
     }
 
-    @GetMapping
-    public ResponseEntity<ArrayList<FileDto>> getAllFiles() {
-        return ResponseEntity.ok().body(fileService.getAllFiles());
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<byte[]> getFileById(@PathVariable Long id) {
@@ -42,11 +38,6 @@ public class FileController {
     FileDto uploadedFile = fileService.uploadFile(file);
     URI uri = URI.create(String.valueOf(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + uploadedFile.id)));
     return ResponseEntity.created(uri).body("File uploaded successfully");
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> updateFile(@PathVariable Long id, @RequestBody FileDto fileDto) {
-        return ResponseEntity.ok(fileService.updateFile(id, fileDto));
     }
 
     @DeleteMapping("/{id}")

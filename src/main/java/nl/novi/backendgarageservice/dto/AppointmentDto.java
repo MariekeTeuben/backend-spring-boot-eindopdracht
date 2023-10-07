@@ -10,14 +10,11 @@ import java.time.LocalTime;
 public class AppointmentDto {
     public Long id;
 
-    @NotBlank
     @FutureOrPresent
     public LocalDate appointmentDate;
-    @NotBlank
-    @FutureOrPresent
+
     public LocalTime appointmentTime;
 
-    @NotBlank
     public AppointmentType appointmentType;
 
     @NotBlank

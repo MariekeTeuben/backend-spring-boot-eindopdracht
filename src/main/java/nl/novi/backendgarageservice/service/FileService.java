@@ -30,27 +30,6 @@ public class FileService {
         return fileDto;
     }
 
-    public ArrayList<FileDto> getAllFiles() {
-        ArrayList<FileDto> fileDtoList = new ArrayList<>();
-        Iterable<File> allFiles = fileRepos.findAll();
-        for (File file : allFiles) {
-            FileDto fileDto = new FileDto();
-
-            fileDto.id = file.getId();
-            fileDto.fileName = file.getFileName();
-            fileDto.docFile = file.getDocFile();
-
-
-            fileDtoList.add(fileDto);
-        }
-
-        if (fileDtoList.size() == 0) {
-            throw new ResourceNotFoundException("Files cannot be found");
-        }
-
-        return fileDtoList;
-    }
-
 
     public FileDto uploadFile(MultipartFile fileUpload) throws java.io.IOException {
 
@@ -66,23 +45,6 @@ public class FileService {
 
         return fileDto;
     }
-
-
-    public Object updateFile(Long id, FileDto fileDto) {
-        Optional<File> optionalFile = fileRepos.findById(id);
-        if (optionalFile.isEmpty()) {
-            throw new ResourceNotFoundException("File cannot be found");
-        } else {
-            File updatedFile = optionalFile.get();
-            updatedFile.setFileName(fileDto.fileName);
-            updatedFile.setDocFile(fileDto.docFile);
-
-            fileRepos.save(updatedFile);
-
-            return updatedFile;
-        }
-    }
-
 
     public Object deleteFile(Long id) {
         Optional<File> optionalFile = fileRepos.findById(id);
