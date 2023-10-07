@@ -8,7 +8,6 @@ import nl.novi.backendgarageservice.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,12 +32,6 @@ public class UserService {
         UserDto userDto = new UserDto();
         userDto.username = user.getUsername();
         userDto.password = user.getPassword();
-
-
-        // user.getroles -> rollen ophalen
-        // daar overheen itereren
-        // rolnames per stuk er uit halen
-        //in de userdto stoppen
 
 
         for (Role role : user.getRoles()) {

@@ -16,7 +16,6 @@ public class Invoice {
 
     private LocalDate date;
 
-
     @OneToMany(mappedBy = "invoice")
     @JsonIgnore
     private List<RepairItem> repairItems;

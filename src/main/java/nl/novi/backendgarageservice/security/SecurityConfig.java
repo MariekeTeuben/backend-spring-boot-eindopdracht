@@ -68,13 +68,13 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/appointments").hasAnyRole("EMPLOYEE", "ADMIN")
                 .requestMatchers(HttpMethod.GET, "/appointments/{id}").hasAnyRole("CUSTOMER", "EMPLOYEE", "ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/appointments/{id}").hasAnyRole("CUSTOMER", "EMPLOYEE", "ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/appointments/{id}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/appointments/{id}").hasAnyRole("CUSTOMER", "EMPLOYEE", "ADMIN")
                 // --------------------------- REGISTRATIONCARDS ---------------------------
                 .requestMatchers("/registration/**").hasAnyRole("EMPLOYEE", "ADMIN")
                 // --------------------------- FILES ---------------------------
                 .requestMatchers("/files/**").hasAnyRole("EMPLOYEE", "ADMIN")
                 // --------------------------- INVOICES ---------------------------
-                .requestMatchers("/invoices/**").hasAnyRole("EMPLOYEE", "ADMIN")
+                .requestMatchers("/invoices").hasAnyRole("EMPLOYEE", "ADMIN")
                 // --------------------------- REPAIRITEMS ---------------------------
                 .requestMatchers("/repairitems/**").hasAnyRole("EMPLOYEE", "ADMIN")
                 // --------------------------- ROLES ---------------------------
