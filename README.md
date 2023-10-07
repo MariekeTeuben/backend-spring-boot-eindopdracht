@@ -1,1 +1,3 @@
 # backend-spring-boot-eindopdracht
+
+Voor de eindopdracht van de leerlijn Backend heb ik een beveiligde RESTful webservice ontworpen, geprogrammeerd en getest. Door verschillende CRUD-opdrachten in te richten, communiceert de applicatie met de relationele database om data zowel op te slaan als op te halen. Gebruikersaccounts zijn voorzien van verschillende rollen en rechten, waardoor beveiliging van endpoints middels authenticatie en autorisatie is ingeregeld. 
